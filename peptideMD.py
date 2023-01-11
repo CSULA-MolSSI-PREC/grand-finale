@@ -5,8 +5,8 @@ from sys import stdout
 import time as time
 
 # read in files
-prmtop = app.AmberPrmtopFile('AAWAA.prmtop')
-inpcrd = app.AmberInpcrdFile('AAWAA.inpcrd')
+prmtop = app.AmberPrmtopFile('YYYYY.prmtop') # change YYYYY to your peptide's name
+inpcrd = app.AmberInpcrdFile('YYYYY.inpcrd') # same here!
 
 # OpenMM setup
 system = prmtop.createSystem(nonbondedMethod=app.NoCutoff, constraints=app.HBonds, implicitSolvent=app.GBn2)
@@ -36,11 +36,11 @@ print('Done!')
 print('Time required for simulation:', tfinal-tinit, 'seconds')
 
 # production
-simulation.reporters.append(app.DCDReporter('AAWAA_sim.dcd', 500))
+simulation.reporters.append(app.DCDReporter('YYYYY_sim.dcd', 500)) # change YYYYY to your peptide's name
 simulation.reporters.append(app.StateDataReporter(stdout, 50000, step=True, time=True,
     potentialEnergy=True, temperature=True, speed=True, separator='\t'))
 
 
 print('Running Production...')
-simulation.step(2500000)
+simulation.step() # add the number of steps inside the parentheses
 print('Done!')
